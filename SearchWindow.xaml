@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:Desktop_App"
         mc:Ignorable="d"
         Title="SearchWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid >
+        <Label Content="Search Medicine" Margin="133,20,233,390"/>
+        <Button Content="Go Back" Click="backToMenu" Margin="30,49,675,345" />
+        <TextBox Name="Searcher" Margin="133,49,233,345" />
+        <Button Content="Search Med" Click="handleSearch" Margin="607,49,45,345" />
+        <ListBox Margin="30,106,45,42" Name="MedsBoxList"/>
     </Grid>
 </Window>

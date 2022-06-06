@@ -24,14 +24,14 @@ namespace Desktop_App
 
         public void NavigateToSearching(object sender, RoutedEventArgs e)
         {
-            SearchWindow searchWindow = new SearchWindow();
+            SearchWindow searchWindow = new();
             searchWindow.Show();
             Close();
         }
 
         public void NavigateToAdding(object sender, RoutedEventArgs e)
         {
-            AddWindow addWindow = new AddWindow();
+            AddWindow addWindow = new();
             addWindow.Show();
             Close();
         }
