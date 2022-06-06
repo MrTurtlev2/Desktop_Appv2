@@ -15,14 +15,25 @@ using System.Windows.Shapes;
 
 namespace Desktop_App
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public void NavigateToSearching(object sender, RoutedEventArgs e)
+        {
+            SearchWindow searchWindow = new SearchWindow();
+            searchWindow.Show();
+            Close();
+        }
+
+        public void NavigateToAdding(object sender, RoutedEventArgs e)
+        {
+            AddWindow addWindow = new AddWindow();
+            addWindow.Show();
+            Close();
         }
     }
 }

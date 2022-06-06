@@ -6,7 +6,12 @@
         xmlns:local="clr-namespace:Desktop_App"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+    <Grid Margin="50">
+        <StackPanel Margin="80 20">
+            <Label Content="Chose Your action" HorizontalAlignment="Center" Margin="30 20 20 20"/>
+            
+            <Button Content="Search Med" Click="NavigateToSearching" Margin="100 20" />
+            <Button Content="Add Med" Click="NavigateToAdding" Margin="100 20" />
+        </StackPanel>
     </Grid>
 </Window>
