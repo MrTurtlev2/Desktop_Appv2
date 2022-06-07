@@ -34,7 +34,7 @@ namespace Desktop_App
                 SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
                 sqlCmd.CommandType = System.Data.CommandType.Text;
                 sqlCmd.Parameters.AddWithValue("@Username", UserLogin.Text);
-                sqlCmd.Parameters.AddWithValue("@UserPassword", UserPassword.Text);
+                sqlCmd.Parameters.AddWithValue("@UserPassword", UserPassword.Password);
                 int count = Convert.ToInt32(sqlCmd.ExecuteScalar());
                 if (count == 1)
                 {
@@ -43,7 +43,7 @@ namespace Desktop_App
                     this.Close();
                 } else
                 {
-                    MessageBox.Show("User Invalid!");
+                    MessageBox.Show("User is not valid!");
                 }
 
             } catch(Exception exeption)

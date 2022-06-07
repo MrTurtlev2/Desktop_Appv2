@@ -16,7 +16,7 @@
             <StackPanel  Orientation="Vertical"  HorizontalAlignment="Center">
                 <TextBox Name="Name" Margin="4" Width="150" HorizontalAlignment="Left"  />
                 
-                <TextBox Name="LastName" Margin="4" Width="150" HorizontalAlignment="Left"  />
+                <TextBox Name="Quantity" Margin="4" Width="150" HorizontalAlignment="Left"  />
             </StackPanel>
 
         </StackPanel>
@@ -25,10 +25,8 @@
         </StackPanel>
 
         <StackPanel  Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-            <Button Content="Add New"  Click="InsertDataBtn_Click" Margin="40 20" />
-            <Button Content="Update Record"  Name="submitBtn1" Margin="40 20" />
-            <Button Content="Delete Record"  Name="submitBtn2" Margin="40 20" />
-            <Button Content="Clear Data"  Click="ClearDataBtn_Click" Margin="40 20" />
+            <Button Content="Add New"  Click="Insert_Med" Margin="40 20" />
+            <Button Content="Clear Data"  Click="Clear_Fields" Margin="40 20" />
         </StackPanel>
 
     </Grid>

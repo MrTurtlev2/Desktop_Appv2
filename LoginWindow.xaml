@@ -12,7 +12,7 @@
             <TextBox Name="UserLogin" />
             <Separator Margin="30" />
             <Label Content="Password" />
-            <TextBox Name="UserPassword" />
+            <PasswordBox Name="UserPassword" />
             <Button Content="Login" Click="handleLoginUser" Name="submitBtn" Margin="40 20" />
         </StackPanel>
     </Grid>
