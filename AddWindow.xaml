@@ -6,7 +6,30 @@
         xmlns:local="clr-namespace:Desktop_App"
         mc:Ignorable="d"
         Title="AddWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Margin="50">
+        <StackPanel Margin="8,2,32,38" Orientation="Horizontal" >
+
+            <StackPanel  Orientation="Vertical"  HorizontalAlignment="Left">
+                <Label Content="Med Name :" HorizontalAlignment="Left"  />
+                <Label Content="Quantity :"  />
+            </StackPanel>
+            <StackPanel  Orientation="Vertical"  HorizontalAlignment="Center">
+                <TextBox Name="Name" Margin="4" Width="150" HorizontalAlignment="Left"  />
+                
+                <TextBox Name="LastName" Margin="4" Width="150" HorizontalAlignment="Left"  />
+            </StackPanel>
+
+        </StackPanel>
+        <StackPanel  VerticalAlignment="Top" HorizontalAlignment="Right">
+            <DataGrid Name="datagrid" Width="438" Height="328"></DataGrid>
+        </StackPanel>
+
+        <StackPanel  Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Button Content="Add New"  Click="InsertDataBtn_Click" Margin="40 20" />
+            <Button Content="Update Record"  Name="submitBtn1" Margin="40 20" />
+            <Button Content="Delete Record"  Name="submitBtn2" Margin="40 20" />
+            <Button Content="Clear Data"  Click="ClearDataBtn_Click" Margin="40 20" />
+        </StackPanel>
+
     </Grid>
 </Window>
