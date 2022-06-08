@@ -23,6 +23,7 @@ namespace Desktop_App
         {
             InitializeComponent();
             LoadData();
+            GetDropdownValues();
         }
         SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-DG8OM09\SQLEXPRESS;Initial Catalog=medicine_base;Integrated Security=True");
 
@@ -64,22 +65,28 @@ namespace Desktop_App
             return true;
         }
 
-        
 
+
+        
 
         private void Insert_Med(object sender, RoutedEventArgs e)
         {
             SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-DG8OM09\SQLEXPRESS;Initial Catalog=medicine_base;Integrated Security=True");
+
+            int DropdownOption = Company.SelectedIndex + 1;
+
             try
             {
                 if (IsValid())
                 {
-                    SqlCommand cmd = new SqlCommand("INSERT INTO Meds_Table VALUES (@Name, @Quantity)", sqlCon);
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Name", Name.Text);
-                    cmd.Parameters.AddWithValue("@Quantity", Quantity.Text);
+                    SqlCommand query = new SqlCommand("INSERT INTO Meds_Table VALUES (@Name, @Quantity, @Price, @Company)", sqlCon);
+                    query.CommandType = CommandType.Text;
+                    query.Parameters.AddWithValue("@Name", Name.Text);
+                    query.Parameters.AddWithValue("@Quantity", Quantity.Text);
+                    query.Parameters.AddWithValue("@Price", Price.Text);
+                    query.Parameters.AddWithValue("@Company", DropdownOption);
                     sqlCon.Open();
-                    cmd.ExecuteNonQuery();
+                    query.ExecuteNonQuery();
                     sqlCon.Close();
                     LoadData();
                     MessageBox.Show("You have added new medicine to database", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -92,6 +99,26 @@ namespace Desktop_App
             }
         }
 
+        public void GetDropdownValues()
+        {
+            try
+            {
+                sqlCon.Open();
+                SqlCommand cmd = new SqlCommand("Select * From Companies", sqlCon);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    string name = dr.GetString(1);
+                    Company.Items.Add(name);
+                }
+                sqlCon.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
 
     }
 }

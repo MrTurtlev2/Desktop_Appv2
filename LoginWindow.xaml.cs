@@ -12,18 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Desktop_App
 {
     public partial class LoginWindow : Window
     {
+
+        public SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-DG8OM09\SQLEXPRESS;Initial Catalog=medicine_base;Integrated Security=True");
         public LoginWindow()
         {
             InitializeComponent();
         }
         public void handleLoginUser(object sender, RoutedEventArgs e)
         {
-            SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-DG8OM09\SQLEXPRESS;Initial Catalog=medicine_base;Integrated Security=True");
+           
             try
             {
                 if (sqlCon.State == System.Data.ConnectionState.Closed)
@@ -52,6 +55,60 @@ namespace Desktop_App
             } finally
             {
                 sqlCon.Close();
+            }
+        }
+
+
+        public bool isDataOK()
+        {
+            if (UserLogin.Text == string.Empty)
+            {
+                MessageBox.Show("Wprowadz Login!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (UserPassword.Password == string.Empty)
+            {
+                MessageBox.Show("Wprowadz Hasło!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+
+
+        public void handleRegisterUser(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (isDataOK())
+                {
+                    bool exists = false;
+                    SqlCommand cmd = new SqlCommand("Select count(*) from User_Table where user_name=@Login", sqlCon);
+                    sqlCon.Open();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Login", UserLogin.Text);
+                    exists = (int)cmd.ExecuteScalar() > 0;
+
+                    if (exists)
+                    {
+                        MessageBox.Show(string.Format("Użytkownik {0} już istnieje", UserLogin.Text), "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        SqlCommand comand = new SqlCommand("INSERT INTO User_Table VALUES (@Login, @Password)", sqlCon);
+                        comand.CommandType = CommandType.Text;
+                        comand.Parameters.AddWithValue("@Login", UserLogin.Text);
+                        comand.Parameters.AddWithValue("@Password", UserPassword.Password);
+                        comand.ExecuteNonQuery();
+                        sqlCon.Close();
+                        MessageBox.Show("Poprawnie zarejestrowano! Kliknij przycisk Zaloguj!", "Rejestracja", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

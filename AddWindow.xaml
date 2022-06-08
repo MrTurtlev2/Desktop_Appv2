@@ -12,19 +12,23 @@
             <StackPanel  Orientation="Vertical"  HorizontalAlignment="Left">
                 <Label Content="Med Name :" HorizontalAlignment="Left"  />
                 <Label Content="Quantity :"  />
+                <Label Content="Price :"  />
+                <Label Content="Company :"  />
             </StackPanel>
             <StackPanel  Orientation="Vertical"  HorizontalAlignment="Center">
                 <TextBox Name="Name" Margin="4" Width="150" HorizontalAlignment="Left"  />
-                
+
                 <TextBox Name="Quantity" Margin="4" Width="150" HorizontalAlignment="Left"  />
+                <TextBox Name="Price" Margin="4" Width="150" HorizontalAlignment="Left"  />
+                <ComboBox Name="Company"></ComboBox>
             </StackPanel>
 
         </StackPanel>
         <StackPanel  VerticalAlignment="Top" HorizontalAlignment="Right">
-            <DataGrid Name="datagrid" Width="438" Height="328"></DataGrid>
+            <DataGrid Name="datagrid" Width="440" Height="223"></DataGrid>
         </StackPanel>
 
-        <StackPanel  Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+        <StackPanel  Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,50">
             <Button Content="Add New"  Click="Insert_Med" Margin="40 20" />
             <Button Content="Clear Data"  Click="Clear_Fields" Margin="40 20" />
         </StackPanel>

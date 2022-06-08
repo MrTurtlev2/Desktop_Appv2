@@ -14,6 +14,7 @@
             <Label Content="Password" />
             <PasswordBox Name="UserPassword" />
             <Button Content="Login" Click="handleLoginUser" Name="submitBtn" Margin="40 20" />
+            <Button Content="Register" Click="handleRegisterUser" Name="registerBtn" Margin="40 20" />
         </StackPanel>
     </Grid>
 </Window>
