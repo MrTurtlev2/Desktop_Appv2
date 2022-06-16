@@ -34,7 +34,7 @@ namespace Desktop_App
         private void LoadData()
         {
 
-            SqlCommand cmd = new SqlCommand("SELECT med_id, med_name, med_quantity, Refundations.refund, Companies.name FROM((Meds_Table INNER JOIN Refundations ON Meds_Table.refundation = Refundations.id) JOIN Companies ON Meds_Table.company = Companies.id)", sqlCon);
+            SqlCommand cmd = new SqlCommand("SELECT med_id AS [Medicine ID], med_name AS [Medicine name], med_quantity AS Storage, Refundations.refund AS [Refund scale], Companies.name AS Producer FROM((Meds_Table INNER JOIN Refundations ON Meds_Table.refundation = Refundations.id) JOIN Companies ON Meds_Table.company = Companies.id)", sqlCon);
             DataTable dt = new DataTable();
 
             sqlCon.Open();
