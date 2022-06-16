@@ -27,7 +27,7 @@
 
         </StackPanel>
         <StackPanel  VerticalAlignment="Top" HorizontalAlignment="Right">
-            <DataGrid Name="datagrid" Width="440" Height="223"></DataGrid>
+            <DataGrid Name="datagrid" Width="440" Height="223" CanUserDeleteRows="True"></DataGrid>
         </StackPanel>
 
 

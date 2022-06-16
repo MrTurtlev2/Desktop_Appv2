@@ -89,6 +89,7 @@ namespace Desktop_App
                 if (IsValid())
                 {
                     SqlCommand query = new SqlCommand("INSERT INTO Meds_Table VALUES (@Name, @Quantity, @Price, @Company)", sqlCon);
+
                     query.CommandType = CommandType.Text;
                     query.Parameters.AddWithValue("@Name", Name.Text);
                     query.Parameters.AddWithValue("@Quantity", Quantity.Text);
@@ -98,6 +99,7 @@ namespace Desktop_App
                     query.ExecuteNonQuery();
                     sqlCon.Close();
                     LoadData();
+
                     MessageBox.Show("You have added new medicine to database", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
                     ClearData();
                 }
@@ -191,6 +193,7 @@ namespace Desktop_App
                 sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("Select * From Refundations", sqlCon);
                 SqlDataReader dr = cmd.ExecuteReader();
+
                 while (dr.Read())
                 {
                     string name = dr.GetString(1);
