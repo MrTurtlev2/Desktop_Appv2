@@ -27,6 +27,7 @@ namespace Desktop_App
             GetDropdownValues();
             GetDropdownRefundValues();
         }
+
         SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-DG8OM09\SQLEXPRESS;Initial Catalog=medicine_base;Integrated Security=True");
 
 
@@ -35,6 +36,7 @@ namespace Desktop_App
 
             SqlCommand cmd = new SqlCommand("SELECT med_id, med_name, med_quantity, Refundations.refund, Companies.name FROM((Meds_Table INNER JOIN Refundations ON Meds_Table.refundation = Refundations.id) JOIN Companies ON Meds_Table.company = Companies.id)", sqlCon);
             DataTable dt = new DataTable();
+
             sqlCon.Open();
             SqlDataReader sdr = cmd.ExecuteReader();
             dt.Load(sdr);
@@ -46,6 +48,9 @@ namespace Desktop_App
         {
             Name.Clear();
             Quantity.Clear();
+            MedId.Clear();
+            Company.SelectedIndex = -1;
+            Refund.SelectedIndex = -1;
 
         }
 
@@ -75,7 +80,6 @@ namespace Desktop_App
 
         private void Insert_Med(object sender, RoutedEventArgs e)
         {
-            SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-DG8OM09\SQLEXPRESS;Initial Catalog=medicine_base;Integrated Security=True");
 
             int DropdownOption = Company.SelectedIndex + 1;
             int RefundOption = Refund.SelectedIndex + 1;
@@ -115,7 +119,7 @@ namespace Desktop_App
             try
             {
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("Poprawnie zmieniono rekord", "Zmienione", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Rekord was updated", "Update operation", MessageBoxButton.OK, MessageBoxImage.Information);
                 sqlCon.Close();
                 ClearData();
                 LoadData();
@@ -123,7 +127,7 @@ namespace Desktop_App
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("Nie udało się zmienić" + ex.Message);
+                MessageBox.Show("Rekord was not updated" + ex.Message);
             }
             finally
             {
@@ -141,7 +145,7 @@ namespace Desktop_App
             try
             {
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("Poprawnie usunięto rekord", "Usunięte", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Med was succesfully deleted", "Med delete operation", MessageBoxButton.OK, MessageBoxImage.Information);
                 sqlCon.Close();
                 ClearData();
                 LoadData();
@@ -149,7 +153,7 @@ namespace Desktop_App
             }
             catch (SqlException ex)
             {
-                MessageBox.Show("Nie udało się usunąć" + " " + ex.Message);
+                MessageBox.Show("Not succesfull" + " " + ex.Message);
             }
             finally
             {

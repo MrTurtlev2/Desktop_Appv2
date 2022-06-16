@@ -63,12 +63,12 @@ namespace Desktop_App
         {
             if (UserLogin.Text == string.Empty)
             {
-                MessageBox.Show("Wprowadz Login!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Enter Login!", "Login not found", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             if (UserPassword.Password == string.Empty)
             {
-                MessageBox.Show("Wprowadz Hasło!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Enter Password!", "Password not found", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -92,7 +92,7 @@ namespace Desktop_App
 
                     if (exists)
                     {
-                        MessageBox.Show(string.Format("Użytkownik {0} już istnieje", UserLogin.Text), "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show(string.Format("User Exists {0} already in database", UserLogin.Text), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
@@ -102,7 +102,7 @@ namespace Desktop_App
                         comand.Parameters.AddWithValue("@Password", UserPassword.Password);
                         comand.ExecuteNonQuery();
                         sqlCon.Close();
-                        MessageBox.Show("Poprawnie zarejestrowano! Kliknij przycisk Zaloguj!", "Rejestracja", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Now You can login into application", "Registration was succesfull", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }
