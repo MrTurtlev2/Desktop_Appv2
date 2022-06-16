@@ -19,7 +19,7 @@
                 <TextBox Name="Name" Margin="4" Width="150" HorizontalAlignment="Left"  />
 
                 <TextBox Name="Quantity" Margin="4" Width="150" HorizontalAlignment="Left"  />
-                <TextBox Name="Price" Margin="4" Width="150" HorizontalAlignment="Left"  />
+                <ComboBox Name="Refund"></ComboBox>
                 <ComboBox Name="Company"></ComboBox>
             </StackPanel>
 

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -24,12 +25,15 @@ namespace Desktop_App
             InitializeComponent();
             LoadData();
             GetDropdownValues();
+            GetDropdownRefundValues();
         }
         SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-DG8OM09\SQLEXPRESS;Initial Catalog=medicine_base;Integrated Security=True");
 
+
         private void LoadData()
         {
-            SqlCommand cmd = new SqlCommand("select * from Meds_Table", sqlCon);
+
+            SqlCommand cmd = new SqlCommand("SELECT med_id, med_name, med_quantity, Refundations.refund, Companies.name FROM((Meds_Table INNER JOIN Refundations ON Meds_Table.refundation = Refundations.id) JOIN Companies ON Meds_Table.company = Companies.id)", sqlCon);
             DataTable dt = new DataTable();
             sqlCon.Open();
             SqlDataReader sdr = cmd.ExecuteReader();
@@ -67,13 +71,14 @@ namespace Desktop_App
 
 
 
-        
+
 
         private void Insert_Med(object sender, RoutedEventArgs e)
         {
             SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-DG8OM09\SQLEXPRESS;Initial Catalog=medicine_base;Integrated Security=True");
 
             int DropdownOption = Company.SelectedIndex + 1;
+            int RefundOption = Refund.SelectedIndex + 1;
 
             try
             {
@@ -83,7 +88,7 @@ namespace Desktop_App
                     query.CommandType = CommandType.Text;
                     query.Parameters.AddWithValue("@Name", Name.Text);
                     query.Parameters.AddWithValue("@Quantity", Quantity.Text);
-                    query.Parameters.AddWithValue("@Price", Price.Text);
+                    query.Parameters.AddWithValue("@Price", RefundOption);
                     query.Parameters.AddWithValue("@Company", DropdownOption);
                     sqlCon.Open();
                     query.ExecuteNonQuery();
@@ -119,6 +124,28 @@ namespace Desktop_App
             }
 
         }
+
+        public void GetDropdownRefundValues()
+        {
+            try
+            {
+                sqlCon.Open();
+                SqlCommand cmd = new SqlCommand("Select * From Refundations", sqlCon);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    string name = dr.GetString(1);
+                    Refund.Items.Add(name);
+                }
+                sqlCon.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+    
 
     }
 }
