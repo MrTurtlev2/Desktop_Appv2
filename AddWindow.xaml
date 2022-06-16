@@ -14,13 +14,15 @@
                 <Label Content="Quantity :"  />
                 <Label Content="Price :"  />
                 <Label Content="Company :"  />
+                <Label Content="Med ID:" Margin="4" />
             </StackPanel>
             <StackPanel  Orientation="Vertical"  HorizontalAlignment="Center">
                 <TextBox Name="Name" Margin="4" Width="150" HorizontalAlignment="Left"  />
 
                 <TextBox Name="Quantity" Margin="4" Width="150" HorizontalAlignment="Left"  />
-                <ComboBox Name="Refund"></ComboBox>
-                <ComboBox Name="Company"></ComboBox>
+                <ComboBox Name="Refund" Margin="4"></ComboBox>
+                <ComboBox x:Name="Company" Margin="4"/>
+                <TextBox x:Name="MedId" Width="62" Height="20" Margin="4" />
             </StackPanel>
 
         </StackPanel>
@@ -28,9 +30,12 @@
             <DataGrid Name="datagrid" Width="440" Height="223"></DataGrid>
         </StackPanel>
 
-        <StackPanel  Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,50">
-            <Button Content="Add New"  Click="Insert_Med" Margin="40 20" />
-            <Button Content="Clear Data"  Click="Clear_Fields" Margin="40 20" />
+
+        <StackPanel  Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="8,167,0,0">
+            <Button Content="Clear Data"  Click="Clear_Fields" Margin="40 20" Width="74" />
+            <Button Content="Add New"  Click="Insert_Med" Margin="4" />
+            <Button Content="Update data"  Click="Update_Med"  Margin="4"/>
+            
         </StackPanel>
 
     </Grid>

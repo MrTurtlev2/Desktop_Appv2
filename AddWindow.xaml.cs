@@ -104,6 +104,46 @@ namespace Desktop_App
             }
         }
 
+
+        private void Update_Med(object sender, RoutedEventArgs e)
+        {
+            int DropdownOption = Company.SelectedIndex + 1;
+            int RefundOption = Refund.SelectedIndex + 1;
+
+            sqlCon.Open();
+            SqlCommand cmd = new SqlCommand("Update Meds_Table set med_name = '" + Name.Text + "',med_quantity = '" + Quantity.Text + "',refundation = '" + RefundOption + "',company = '" + DropdownOption + "' WHERE med_id = '" + MedId.Text + "'", sqlCon);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Poprawnie zmieniono rekord", "Zmienione", MessageBoxButton.OK, MessageBoxImage.Information);
+                sqlCon.Close();
+                ClearData();
+                LoadData();
+                sqlCon.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Nie udało się zmienić" + ex.Message);
+            }
+            finally
+            {
+                sqlCon.Close();
+                ClearData();
+                LoadData();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         public void GetDropdownValues()
         {
             try
