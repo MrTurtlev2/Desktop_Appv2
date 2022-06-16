@@ -35,7 +35,7 @@
             <Button Content="Clear Data"  Click="Clear_Fields" Margin="40 20" Width="74" />
             <Button Content="Add New"  Click="Insert_Med" Margin="4" />
             <Button Content="Update data"  Click="Update_Med"  Margin="4"/>
-            
+            <Button Content="Dell Med"  Click="Delete_Med" Margin="4" />
         </StackPanel>
 
     </Grid>

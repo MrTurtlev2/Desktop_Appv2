@@ -134,13 +134,28 @@ namespace Desktop_App
         }
 
 
-
-
-
-
-
-
-
+        private void Delete_Med(object sender, RoutedEventArgs e)
+        {
+            sqlCon.Open();
+            SqlCommand cmd = new SqlCommand("DELETE from Meds_Table where med_id = " + MedId.Text + "", sqlCon);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Poprawnie usunięto rekord", "Usunięte", MessageBoxButton.OK, MessageBoxImage.Information);
+                sqlCon.Close();
+                ClearData();
+                LoadData();
+                sqlCon.Close();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Nie udało się usunąć" + " " + ex.Message);
+            }
+            finally
+            {
+                sqlCon.Close();
+            }
+        }
 
 
 
