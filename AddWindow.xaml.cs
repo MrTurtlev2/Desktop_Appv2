@@ -27,8 +27,8 @@ namespace Desktop_App
             GetDropdownValues();
             GetDropdownRefundValues();
         }
-
-        SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-DG8OM09\SQLEXPRESS;Initial Catalog=medicine_base;Integrated Security=True");
+        public SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-2CS4BPV;Initial Catalog=medicine_base;Integrated Security=True");
+        /* SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-DG8OM09\SQLEXPRESS;Initial Catalog=medicine_base;Integrated Security=True");*/
 
 
         private void LoadData()
@@ -69,6 +69,22 @@ namespace Desktop_App
             if (Quantity.Text == string.Empty)
             {
                 MessageBox.Show("Quantity is required", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (System.Text.RegularExpressions.Regex.IsMatch(Quantity.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Quantity is not a number", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                Quantity.Clear();
+                return false;
+            }
+            if(Company.SelectedValue == null)
+            {
+                MessageBox.Show("Company need to be provided", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (Refund.SelectedValue == null)
+            {
+                MessageBox.Show("Refund type need to be provided", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             return true;

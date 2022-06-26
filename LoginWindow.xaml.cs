@@ -4,13 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 using System.Data.SqlClient;
 using System.Data;
 
@@ -18,8 +12,10 @@ namespace Desktop_App
 {
     public partial class LoginWindow : Window
     {
+        
+             public SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-2CS4BPV;Initial Catalog=medicine_base;Integrated Security=True");
 
-        public SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-DG8OM09\SQLEXPRESS;Initial Catalog=medicine_base;Integrated Security=True");
+        /* public SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-DG8OM09\SQLEXPRESS;Initial Catalog=medicine_base;Integrated Security=True");*/
         public LoginWindow()
         {
             InitializeComponent();
@@ -60,7 +56,8 @@ namespace Desktop_App
 
 
         public bool isDataOK()
-        {
+        { 
+
             if (UserLogin.Text == string.Empty)
             {
                 MessageBox.Show("Enter Login!", "Login not found", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -69,6 +66,16 @@ namespace Desktop_App
             if (UserPassword.Password == string.Empty)
             {
                 MessageBox.Show("Enter Password!", "Password not found", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (UserLogin.Text.Length < 4)
+            {
+                MessageBox.Show("Enter longer user name!", "Name too short", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (UserPassword.Password.Length < 4)
+            {
+                MessageBox.Show("Enter longer user password!", "Password too short", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
 
